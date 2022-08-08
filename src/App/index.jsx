@@ -10,14 +10,47 @@ export default function App() {
   const [letterUsed, setLettersUsed] = useState({});
   const answer = "teste"; //eslint-disable-line
 
-  function handleKeyUp({ key }) {
-    console.log(key);
+  function registerAttempt() {
+    const newGuess = attempt
+      .split("")
+      .map((letter) => ({ key: letter, color: "grey" }));
 
+    // find green letters
+    newGuess.forEach((letter, index) => {
+      if (letter.key === answer[index]) {
+        newGuess[index].color = "green";
+      }
+    });
+
+    newGuess.forEach((letter, index) => {
+      if (answer.includes(letter.key) && letter.color !== "green") {
+        newGuess[index].color = "yellow";
+      }
+    });
+
+    setGuesses((state) =>
+      state.map((guess, index) => {
+        if (index === turn) {
+          return newGuess;
+        }
+        return guess;
+      })
+    );
+    setAttempt("");
+    setTurn((state) => state + 1);
+  }
+
+  function handleKeyUp({ key }) {
     if (key === "Enter" && attempt.length === 5) {
+      if (attempt.length !== 5) return;
+      if (turn > 6) return;
+
       // TODO verify answer
       if (attempt === answer) {
         alert("certa resposta");
       }
+
+      registerAttempt();
     }
 
     if (key === "Backspace") {

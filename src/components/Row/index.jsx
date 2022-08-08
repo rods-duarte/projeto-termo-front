@@ -6,7 +6,9 @@ export default function Row({ guess, attempt }) {
     return (
       <WordRow>
         {guess.map((letter) => (
-          <LetterBox>{letter.toUpperCase()}</LetterBox>
+          <LetterBox className={letter.color}>
+            {letter.key.toUpperCase()}
+          </LetterBox>
         ))}
       </WordRow>
     );
@@ -53,4 +55,19 @@ const LetterBox = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 50px;
+
+  &.grey {
+    background-color: #999;
+    color: #fff;
+  }
+
+  &.yellow {
+    background-color: #d08b01;
+    color: #fff;
+  }
+
+  &.green {
+    background-color: #28af28;
+    color: #fff;
+  }
 `;

@@ -36,5 +36,9 @@ export default function App() {
     return () => window.removeEventListener("keyup", handleKeyUp);
   }, [handleKeyUp]);
 
-  return <div />;
+  return (
+    <div>
+      <GameBoard guesses={guesses} attempt={attempt} turn={turn} />
+    </div>
+  );
 }

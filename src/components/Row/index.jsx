@@ -44,12 +44,12 @@ const WordRow = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin: 10px 0;
+  gap: 5px;
 `;
 
 const LetterBox = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   border: 1px solid #333;
   display: flex;
   justify-content: center;

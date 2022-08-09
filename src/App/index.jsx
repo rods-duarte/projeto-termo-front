@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 import GameBoard from "../components/GameBoard";
+import Keyboard from "../components/Keyboard";
+import GlobalStyle from "../assets/styles/global";
 
 const wordLength = 5; //! .env
 
@@ -7,7 +10,7 @@ export default function App() {
   const [attempt, setAttempt] = useState("");
   const [turn, setTurn] = useState(0);
   const [guesses, setGuesses] = useState([...Array(6)]);
-  const [letterUsed, setLettersUsed] = useState({});
+  const [lettersUsed, setLettersUsed] = useState({});
   const answer = "teste"; //eslint-disable-line
 
   function registerAttempt() {
@@ -15,7 +18,6 @@ export default function App() {
       .split("")
       .map((letter) => ({ key: letter, color: "grey" }));
 
-    // find green letters
     newGuess.forEach((letter, index) => {
       if (letter.key === answer[index]) {
         newGuess[index].color = "green";
@@ -38,6 +40,12 @@ export default function App() {
     );
     setAttempt("");
     setTurn((state) => state + 1);
+
+    const letters = {};
+    newGuess.forEach((letter) => {
+      lettersUsed[letter.key] = letter;
+    });
+    setLettersUsed({ ...lettersUsed, letters });
   }
 
   function handleKeyUp({ key }) {
@@ -70,8 +78,18 @@ export default function App() {
   }, [handleKeyUp]);
 
   return (
-    <div>
+    <Main>
       <GameBoard guesses={guesses} attempt={attempt} turn={turn} />
-    </div>
+      <Keyboard lettersUsed={lettersUsed} />
+      <GlobalStyle />
+    </Main>
   );
 }
+
+const Main = styled.main`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+`;

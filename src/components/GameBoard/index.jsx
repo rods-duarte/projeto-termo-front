@@ -15,6 +15,8 @@ export default function GameBoard({ guesses, turn, attempt }) {
 }
 
 const Board = styled.div`
-  width: 500px;
+  max-width: fit-content;
+  display: grid;
+  gap: 5px;
   margin: 0 auto;
 `;

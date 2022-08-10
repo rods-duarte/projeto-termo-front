@@ -52,14 +52,14 @@ export default function App() {
   function handleKeyUp({ key }) {
     if (key === "Enter" && attempt.length === 5) {
       if (attempt.length !== 5) return;
-      if (turn > 6) return;
+      if (turn > 5) return;
 
       if (!words[attempt]) {
         alert("palavra invalida");
         return;
       }
 
-      // TODO verify answer
+      //! essa validacao deve ser feita dentro do registerAttempt
       if (attempt === answer) {
         alert("certa resposta");
       }

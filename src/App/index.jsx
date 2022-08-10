@@ -3,6 +3,7 @@ import styled from "styled-components";
 import GameBoard from "../components/GameBoard";
 import Keyboard from "../components/Keyboard";
 import GlobalStyle from "../assets/styles/global";
+import { words } from "../words";
 
 const wordLength = 5; //! .env
 
@@ -11,7 +12,7 @@ export default function App() {
   const [turn, setTurn] = useState(0);
   const [guesses, setGuesses] = useState([...Array(6)]);
   const [lettersUsed, setLettersUsed] = useState({});
-  const answer = "teste"; //eslint-disable-line
+  const answer = "given"; //eslint-disable-line
 
   function registerAttempt() {
     const newGuess = attempt
@@ -52,6 +53,11 @@ export default function App() {
     if (key === "Enter" && attempt.length === 5) {
       if (attempt.length !== 5) return;
       if (turn > 6) return;
+
+      if (!words[attempt]) {
+        alert("palavra invalida");
+        return;
+      }
 
       // TODO verify answer
       if (attempt === answer) {

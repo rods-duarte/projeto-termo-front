@@ -1,11 +1,8 @@
 import { useState } from "react";
+import { RiDeleteBack2Line } from "react-icons/ri";
 import styled from "styled-components";
 
 export default function Keyboard({ lettersUsed }) {
-  console.log(
-    "🚀 ~ file: index.jsx ~ line 5 ~ Keyboard ~ lettersUsed",
-    lettersUsed
-  );
   const [letters, setLetters] = useState([
     { key: "Q" },
     { key: "W" },
@@ -52,9 +49,15 @@ export default function Keyboard({ lettersUsed }) {
 
   return (
     <KeyboardContainer>
-      <div>{firstRow}</div>
-      <div>{secondRow}</div>
-      <div>{thirdRow}</div>
+      <KeyboardRow>{firstRow}</KeyboardRow>
+      <KeyboardRow>{secondRow}</KeyboardRow>
+      <KeyboardRow>
+        <Key className="enter">Enter</Key>
+        {thirdRow}
+        <Key className="del">
+          <RiDeleteBack2Line />
+        </Key>
+      </KeyboardRow>
     </KeyboardContainer>
   );
 }
@@ -67,13 +70,13 @@ const KeyboardContainer = styled.div`
   align-items: center;
   row-gap: 5px;
   font-weight: 500;
+`;
 
-  & > div {
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    column-gap: 2px;
-  }
+const KeyboardRow = styled.div`
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  column-gap: 2px;
 `;
 
 const Key = styled.div`
@@ -83,6 +86,7 @@ const Key = styled.div`
   border-radius: 5px;
   background-color: #818384;
   color: #fff;
+  font-size: 19px;
 
   display: flex;
   justify-content: center;
@@ -98,5 +102,14 @@ const Key = styled.div`
 
   &.green {
     background-color: #538d4e;
+  }
+
+  &.enter,
+  &.del {
+    width: 70px;
+  }
+
+  &.del {
+    font-size: 28px;
   }
 `;

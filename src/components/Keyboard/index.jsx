@@ -48,6 +48,7 @@ export default function Keyboard({ lettersUsed }) {
     if (index <= 9) {
       firstRow.push(
         <Key
+          key={letter.key}
           id={letter.key.toLowerCase()}
           onClick={(e) => handleClick(e)}
           className={color}
@@ -58,6 +59,7 @@ export default function Keyboard({ lettersUsed }) {
     } else if (index <= 18) {
       secondRow.push(
         <Key
+          key={letter.key}
           id={letter.key.toLowerCase()}
           onClick={(e) => handleClick(e)}
           className={color}
@@ -68,6 +70,7 @@ export default function Keyboard({ lettersUsed }) {
     } else {
       thirdRow.push(
         <Key
+          key={letter.key}
           id={letter.key.toLowerCase()}
           onClick={(e) => handleClick(e)}
           className={color}

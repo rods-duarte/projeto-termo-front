@@ -7,10 +7,15 @@ export default function GameBoard({ guesses, turn, attempt, gameEnd }) {
       {guesses.map((guess, index) => {
         if (index === turn) {
           return (
-            <Row attempt={attempt} isTurn={index === turn} gameEnd={gameEnd} />
+            <Row
+              key={index}
+              attempt={attempt}
+              isTurn={index === turn}
+              gameEnd={gameEnd}
+            />
           );
         }
-        return <Row guess={guess} />;
+        return <Row key={index} guess={guess} />;
       })}
     </Board>
   );

@@ -9,6 +9,7 @@ export default function Row({ guess, attempt, isTurn, gameEnd }) {
       <WordRow>
         {guess.map((letter, index) => (
           <LetterBox
+            key={index}
             id={index === lastIndex ? "last" : undefined}
             className={letter.color}
           >
@@ -25,11 +26,13 @@ export default function Row({ guess, attempt, isTurn, gameEnd }) {
 
     return (
       <WordRow>
-        {attempt.split("").map((letter) => (
-          <LetterBox className="active">{letter.toUpperCase()}</LetterBox>
+        {attempt.split("").map((letter, index) => (
+          <LetterBox key={index} className="active">
+            {letter.toUpperCase()}
+          </LetterBox>
         ))}
-        {emptyBoxes.map(() => (
-          <LetterBox />
+        {emptyBoxes.map((letter, index) => (
+          <LetterBox key={index} />
         ))}
       </WordRow>
     );

@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import Row from "../Row";
 
-export default function GameBoard({ guesses, turn, attempt }) {
+export default function GameBoard({ guesses, turn, attempt, gameEnd }) {
   return (
     <Board>
       {guesses.map((guess, index) => {
         if (index === turn) {
-          return <Row attempt={attempt} isTurn={index === turn} />;
+          return (
+            <Row attempt={attempt} isTurn={index === turn} gameEnd={gameEnd} />
+          );
         }
         return <Row guess={guess} />;
       })}

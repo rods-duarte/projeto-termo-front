@@ -47,6 +47,8 @@ export default function Keyboard({ lettersUsed }) {
     }
   });
 
+  function handleClick() {}
+
   return (
     <KeyboardContainer>
       <KeyboardRow>{firstRow}</KeyboardRow>

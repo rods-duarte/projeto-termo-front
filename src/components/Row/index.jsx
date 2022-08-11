@@ -1,12 +1,17 @@
+import { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 
 const wordLength = 5;
-export default function Row({ guess, attempt, isTurn }) {
+export default function Row({ guess, attempt, isTurn, gameEnd }) {
   if (guess) {
+    const lastIndex = wordLength - 1;
     return (
       <WordRow>
-        {guess.map((letter) => (
-          <LetterBox className={letter.color}>
+        {guess.map((letter, index) => (
+          <LetterBox
+            id={index === lastIndex ? "last" : undefined}
+            className={letter.color}
+          >
             {letter.key.toUpperCase()}
           </LetterBox>
         ))}
@@ -17,8 +22,9 @@ export default function Row({ guess, attempt, isTurn }) {
   if (attempt) {
     const emptySpaces = wordLength - attempt.length;
     const emptyBoxes = [...Array(emptySpaces)];
+
     return (
-      <WordRow className="active">
+      <WordRow>
         {attempt.split("").map((letter) => (
           <LetterBox className="active">{letter.toUpperCase()}</LetterBox>
         ))}
@@ -30,7 +36,7 @@ export default function Row({ guess, attempt, isTurn }) {
   }
 
   return (
-    <WordRow className={isTurn ? "active" : "inactive"}>
+    <WordRow className={isTurn && !gameEnd ? null : "inactive"}>
       <LetterBox> </LetterBox>
       <LetterBox> </LetterBox>
       <LetterBox> </LetterBox>

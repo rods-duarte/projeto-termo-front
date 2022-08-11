@@ -12,7 +12,19 @@ export function GameContextProvider({ children }) {
   const [turn, setTurn] = useState(0);
   const [guesses, setGuesses] = useState([...Array(6)]);
   const [lettersUsed, setLettersUsed] = useState({});
+  const [gameEnd, setGameEnd] = useState(false);
+  const [blockKeyPress, setBlockKeyPress] = useState(false);
   const answer = "given"; //eslint-disable-line
+
+  function isCorrectAnswer() {
+    return answer === attempt;
+  }
+
+  function updateTurn() {
+    setAttempt("");
+    setTurn((state) => state + 1);
+    if (isCorrectAnswer()) setGameEnd(true);
+  }
 
   function registerAttempt() {
     const newGuess = attempt
@@ -39,8 +51,8 @@ export function GameContextProvider({ children }) {
         return guess;
       })
     );
-    setAttempt("");
-    setTurn((state) => state + 1);
+
+    updateTurn();
 
     const letters = {};
     newGuess.forEach((letter) => {
@@ -49,7 +61,27 @@ export function GameContextProvider({ children }) {
     setLettersUsed({ ...lettersUsed, letters });
   }
 
+  function handleAnimationStart(e) {
+    const classes = e.target.classList;
+    if (
+      classes.contains("grey") ||
+      classes.contains("green") ||
+      classes.contains("yellow")
+    ) {
+      setBlockKeyPress(true);
+    }
+  }
+
+  function handleAnimationEnd(e) {
+    if (e.target.id === "last") {
+      setBlockKeyPress(false);
+    }
+  }
+
   function handleKeyUp({ key }) {
+    if (gameEnd) return;
+    if (blockKeyPress) return;
+
     if (key === "Enter" && attempt.length === 5) {
       if (attempt.length !== 5) return;
       if (turn > 5) return;
@@ -85,7 +117,10 @@ export function GameContextProvider({ children }) {
         turn,
         guesses,
         lettersUsed,
+        gameEnd,
         handleKeyUp,
+        handleAnimationStart,
+        handleAnimationEnd,
       }}
     >
       {children}

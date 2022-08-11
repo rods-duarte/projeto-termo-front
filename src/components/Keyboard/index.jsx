@@ -31,32 +31,63 @@ export default function Keyboard({ lettersUsed }) {
     { key: "N" },
     { key: "M" },
   ]);
-
   const firstRow = [];
   const secondRow = [];
   const thirdRow = [];
 
+  function handleClick(e) {
+    window.dispatchEvent(
+      new KeyboardEvent("keyup", {
+        key: e.target.id,
+      })
+    );
+  }
+
   letters.forEach((letter, index) => {
     const color = lettersUsed[letter.key.toLowerCase()]?.color;
     if (index <= 9) {
-      firstRow.push(<Key className={color}>{letter.key}</Key>);
+      firstRow.push(
+        <Key
+          id={letter.key.toLowerCase()}
+          onClick={(e) => handleClick(e)}
+          className={color}
+        >
+          {letter.key}
+        </Key>
+      );
     } else if (index <= 18) {
-      secondRow.push(<Key className={color}>{letter.key}</Key>);
+      secondRow.push(
+        <Key
+          id={letter.key.toLowerCase()}
+          onClick={(e) => handleClick(e)}
+          className={color}
+        >
+          {letter.key}
+        </Key>
+      );
     } else {
-      thirdRow.push(<Key className={color}>{letter.key}</Key>);
+      thirdRow.push(
+        <Key
+          id={letter.key.toLowerCase()}
+          onClick={(e) => handleClick(e)}
+          className={color}
+        >
+          {letter.key}
+        </Key>
+      );
     }
   });
-
-  function handleClick() {}
 
   return (
     <KeyboardContainer>
       <KeyboardRow>{firstRow}</KeyboardRow>
       <KeyboardRow>{secondRow}</KeyboardRow>
       <KeyboardRow>
-        <Key className="enter">Enter</Key>
+        <Key id="Enter" onClick={(e) => handleClick(e)}>
+          Enter
+        </Key>
         {thirdRow}
-        <Key className="del">
+        <Key id="Backspace" onClick={(e) => handleClick(e)}>
           <RiDeleteBack2Line />
         </Key>
       </KeyboardRow>
@@ -94,6 +125,10 @@ const Key = styled.div`
   justify-content: center;
   align-items: center;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &.grey {
     background-color: #3a3a3c;
   }
@@ -106,12 +141,16 @@ const Key = styled.div`
     background-color: #538d4e;
   }
 
-  &.enter,
-  &.del {
+  &#Enter,
+  &#Backspace {
     width: 70px;
   }
 
-  &.del {
+  &#Backspace {
     font-size: 28px;
+  }
+
+  & > svg {
+    pointer-events: none;
   }
 `;

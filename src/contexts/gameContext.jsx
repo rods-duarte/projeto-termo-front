@@ -5,7 +5,7 @@ import { words } from "../words";
 
 export const GameContext = createContext();
 
-const wordLength = 5; //! .env
+const wordLength = 5;
 
 export function GameContextProvider({ children }) {
   const [attempt, setAttempt] = useState("");

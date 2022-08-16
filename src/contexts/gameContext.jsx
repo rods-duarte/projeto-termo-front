@@ -15,7 +15,7 @@ export function GameContextProvider({ children }) {
   const [turn, setTurn] = useLocalStorage("turn", 0);
   const [guesses, setGuesses] = useLocalStorage("guesses", [...Array(6)]);
   const [lettersUsed, setLettersUsed] = useState({});
-  const [gameEnd, setGameEnd] = useState(false);
+  const [gameEnd, setGameEnd] = useLocalStorage("gameEnd", false);
   const [blockKeyPress, setBlockKeyPress] = useState(false);
   const [data, setData] = useLocalStorage("data", null);
   const [answer, setAnswer] = useState(null);
@@ -26,9 +26,11 @@ export function GameContextProvider({ children }) {
       const response = await api.getGameData();
       const wordsArray = Object.getOwnPropertyNames(words);
 
+      // reset localstorage values if the word is new
       if (response.data.answer !== data.answer) {
         setGuesses([...Array(6)]);
         setTurn(0);
+        setGameEnd(false);
       }
 
       setAnswer(wordsArray[Number(response.data.answer)]);
@@ -153,11 +155,6 @@ export function GameContextProvider({ children }) {
       if (!words[attempt]) {
         alert("palavra invalida");
         return;
-      }
-
-      //! essa validacao deve ser feita dentro do registerAttempt
-      if (attempt === answer) {
-        alert("certa resposta");
       }
 
       registerAttempt();

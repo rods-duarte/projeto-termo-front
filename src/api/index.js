@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseAPI = axios.create({
-  baseURL: "https://app-termo.herokuapp.com/",
+  baseURL: "http://localhost:5000",
 });
 
 function getConfig(token) {

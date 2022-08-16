@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-
 import { createContext, useState } from "react";
 import Signin from "../components/Signin"; // eslint-disable-line
 

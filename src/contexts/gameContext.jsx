@@ -1,10 +1,9 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-
 import { createContext, useState, useEffect, useContext } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { api } from "../api";
 import { words } from "../words";
 import { UserContext } from "./userContext";
+import { AlertContext } from "./alertContext";
 
 export const GameContext = createContext();
 
@@ -20,24 +19,29 @@ export function GameContextProvider({ children }) {
   const [data, setData] = useLocalStorage("data", null);
   const [answer, setAnswer] = useState(null);
   const { user, setUser } = useContext(UserContext);
+  const { setAlert, alertContent, setAlertContent } = useContext(AlertContext);
 
-  useEffect(async () => {
-    try {
-      const response = await api.getGameData();
-      const wordsArray = Object.getOwnPropertyNames(words);
+  useEffect(() => {
+    api
+      .getGameData()
+      .then((response) => {
+        const wordsArray = Object.getOwnPropertyNames(words);
+        console.log(response);
 
-      // reset localstorage values if the word is new
-      if (response.data.answer !== data.answer) {
-        setGuesses([...Array(6)]);
-        setTurn(0);
-        setGameEnd(false);
-      }
+        // reset localstorage values if the word is new
+        if (response.data.answer !== data?.answer) {
+          setGuesses([...Array(6)]);
+          setTurn(0);
+          setGameEnd(false);
+        }
 
-      setAnswer(wordsArray[Number(response.data.answer)]);
-      setData(response.data);
-    } catch (err) {
-      alert("error while getting game data, try again later !");
-    }
+        setAnswer(wordsArray[Number(response.data.answer)]);
+        setData(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("error while getting game data, try again later !");
+      });
   }, []);
 
   useEffect(() => {
@@ -147,13 +151,15 @@ export function GameContextProvider({ children }) {
     if (gameEnd) return;
     if (blockKeyPress) return;
 
+    setAlert(false);
+
     if (key === "Enter" && attempt.length === 5) {
       if (attempt.length !== 5) return;
       if (turn > 5) return;
-      console.log(key);
 
       if (!words[attempt]) {
-        alert("palavra invalida");
+        setAlertContent("Word not in the list !");
+        setAlert(true);
         return;
       }
 

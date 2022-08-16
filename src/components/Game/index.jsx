@@ -47,7 +47,7 @@ export default function Game() {
 }
 
 const Main = styled.main`
-  height: 100vh;
+  height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;
   align-items: center;

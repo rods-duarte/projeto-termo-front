@@ -28,6 +28,7 @@
         "react/no-array-index-key": "off",
         "no-unused-vars": "off",
         "jsx-a11y/label-has-associated-control": "off",
-        "import/no-cycle": "off"
+        "import/no-cycle": "off",
+        "react/jsx-no-constructed-context-values": "off"
     }
 }

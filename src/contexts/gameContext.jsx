@@ -26,7 +26,6 @@ export function GameContextProvider({ children }) {
       .getGameData()
       .then((response) => {
         const wordsArray = Object.getOwnPropertyNames(words);
-        console.log(response);
 
         // reset localstorage values if the word is new
         if (response.data.answer !== data?.answer) {

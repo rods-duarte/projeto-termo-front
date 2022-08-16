@@ -2,6 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../../contexts/userContext";
 import ProgressBar from "../progressBar";
+import Timer from "../Timer";
 
 export default function UserStats() {
   const { user } = useContext(UserContext);
@@ -10,7 +11,7 @@ export default function UserStats() {
   const winPercentage = Math.floor((100 * user.wins) / total) || 0;
   return (
     <Stats>
-      <span>{`${user?.username}\` statistics`}</span>
+      <span>{`${user?.username || ""} statistics`}</span>
       <MainInfo>
         <div>
           <span>{total}</span>
@@ -38,6 +39,8 @@ export default function UserStats() {
         <ProgressBar index="5" total={total} current={user.fiveGuess} />
         <ProgressBar index="6" total={total} current={user.sixGuess} />
       </GuessDistribution>
+      <span>Next word in</span>
+      <Timer />
     </Stats>
   );
 }

@@ -184,6 +184,7 @@ export function GameContextProvider({ children }) {
         gameEnd,
         answer,
         blockKeyPress,
+        data,
         setBlockKeyPress,
         handleKeyUp,
         handleAnimationStart,

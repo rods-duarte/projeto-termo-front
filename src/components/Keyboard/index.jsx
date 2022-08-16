@@ -45,6 +45,7 @@ export default function Keyboard({ lettersUsed }) {
 
   letters.forEach((letter, index) => {
     const color = lettersUsed[letter.key.toLowerCase()]?.color;
+
     if (index <= 9) {
       firstRow.push(
         <Key
@@ -134,6 +135,7 @@ const Key = styled.div`
 
   &.grey {
     background-color: #3a3a3c;
+    opacity: 0.5;
   }
 
   &.yellow {

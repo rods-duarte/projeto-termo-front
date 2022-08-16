@@ -29,13 +29,13 @@ const Wrapper = styled.div`
   left: calc(50% - 100px);
   top: 45px;
   z-index: 5;
-  animation: appear 0.5s ease-in-out 0s forwards normal;
-  animation: shake 0.5s ease-in-out 0s forwards;
-  animation: dissapear 0.5s ease-in-out 3s forwards;
+  animation: appear 0.5s ease-in-out 0s forwards,
+    shake 0.5s ease-in-out 0s forwards, dissapear 0.5s ease-in-out 3s forwards;
 
   @keyframes appear {
     0% {
       opacity: 0;
+      display: block;
     }
 
     100% {
@@ -55,24 +55,25 @@ const Wrapper = styled.div`
   }
 
   @keyframes shake {
-    0% {
-      transform: rotateZ(0);
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
     }
 
-    25% {
-      transform: rotateZ(10deg);
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
     }
 
-    50% {
-      transform: rotateZ(0deg);
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
     }
 
-    75% {
-      transform: rotateZ(-10deg);
-    }
-
-    100% {
-      transform: rotateZ(0deg);
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
     }
   }
 `;

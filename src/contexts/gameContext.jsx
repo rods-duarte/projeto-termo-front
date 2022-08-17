@@ -83,7 +83,7 @@ export function GameContextProvider({ children }) {
         wins: user.wins + 1,
         currentStreak: user.currentStreak + 1,
         bestStreak:
-          user.currentStreak > user.bestStreak
+          user.currentStreak >= user.bestStreak
             ? user.currentStreak + 1
             : user.bestStreak,
       };
@@ -96,18 +96,23 @@ export function GameContextProvider({ children }) {
         setAlert(true);
         setModal(true);
       }, 1500);
-      setTimeout(() => {}, 2000);
       return;
     }
 
-    if (turn === 5) {
+    if (turn === 5 && !isCorrectAnswer()) {
       const newStats = {
         losses: user.losses + 1,
         currentStreak: 0,
       };
+      setAlertContent(answer);
 
       setUser({ ...user, ...newStats });
       api.updateStats(user.id, user.token, newStats);
+      setModalContent(<UserStats />);
+      setTimeout(() => {
+        setAlert(true);
+        setModal(true);
+      }, 1500);
     }
   }
 

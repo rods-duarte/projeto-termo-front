@@ -185,8 +185,12 @@ export function GameContextProvider({ children }) {
 
     setAlert(false);
 
-    if (key === "Enter" && attempt.length === 5) {
-      if (attempt.length !== 5) return;
+    if (key === "Enter") {
+      if (attempt.length !== 5) {
+        setAlertContent("Not enough letters");
+        setAlert(true);
+        return;
+      }
       if (turn > 5) return;
 
       if (!words[attempt]) {

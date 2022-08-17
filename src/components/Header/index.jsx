@@ -26,8 +26,7 @@ export default function Header() {
       <span>Termo</span>
       <GoGraph
         onClick={() => {
-          if (!user?.token) alert("You must be logged !");
-          else setModalContent(<Stats />);
+          setModalContent(<Stats />);
           setModal(true);
         }}
       />

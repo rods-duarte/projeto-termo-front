@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   left: calc(50% - 100px);
-  top: 45px;
+  top: 15px;
   z-index: 5;
   animation: ${(props) =>
     props.badAnimation

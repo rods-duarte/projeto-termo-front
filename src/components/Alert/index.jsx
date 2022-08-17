@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { AlertContext } from "../../contexts/alertContext";
 
 export default function Alert({ children }) {
-  const { alert, setAlert } = useContext(AlertContext);
+  const { alert, badAnimation } = useContext(AlertContext);
   const alertElement = useRef();
 
   if (!alert) return null;
 
   return (
-    <Wrapper ref={alertElement}>
+    <Wrapper ref={alertElement} badAnimation={badAnimation}>
       <span>{children}</span>
     </Wrapper>
   );
@@ -29,8 +29,10 @@ const Wrapper = styled.div`
   left: calc(50% - 100px);
   top: 45px;
   z-index: 5;
-  animation: appear 0.5s ease-in-out 0s forwards,
-    shake 0.5s ease-in-out 0s forwards, dissapear 0.5s ease-in-out 3s forwards;
+  animation: ${(props) =>
+    props.badAnimation
+      ? "appear 0.5s ease-in-out 0s forwards, shake 0.5s ease-in-out 0s forwards, dissapear 0.5s ease-in-out 3s forwards"
+      : "appear 0.5s ease-in-out 0s forwards, dissapear 0.5s ease-in-out 3s forwards"};
 
   @keyframes appear {
     0% {

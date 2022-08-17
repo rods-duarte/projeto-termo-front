@@ -22,7 +22,8 @@ export function GameContextProvider({ children }) {
   const [answer, setAnswer] = useState(null);
   const { user, setUser } = useContext(UserContext);
 
-  const { setAlert, setAlertContent } = useContext(AlertContext);
+  const { setAlert, setAlertContent, setBadAnimation } =
+    useContext(AlertContext);
   const { setModal, setModalContent } = useContext(ModalContext);
 
   useEffect(() => {
@@ -91,6 +92,7 @@ export function GameContextProvider({ children }) {
       setUser({ ...user, ...newStats });
       api.updateStats(user.id, user.token, newStats);
 
+      setBadAnimation(false);
       setModalContent(<UserStats />);
       setTimeout(() => {
         setAlert(true);
@@ -105,6 +107,7 @@ export function GameContextProvider({ children }) {
         currentStreak: 0,
       };
       setAlertContent(answer);
+      setBadAnimation(false);
 
       setUser({ ...user, ...newStats });
       api.updateStats(user.id, user.token, newStats);

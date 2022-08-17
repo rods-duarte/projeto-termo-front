@@ -4,6 +4,8 @@ import { api } from "../api";
 import { words } from "../words";
 import { UserContext } from "./userContext";
 import { AlertContext } from "./alertContext";
+import { ModalContext } from "./modalContext";
+import UserStats from "../components/Stats";
 
 export const GameContext = createContext();
 
@@ -19,7 +21,9 @@ export function GameContextProvider({ children }) {
   const [data, setData] = useLocalStorage("data", null);
   const [answer, setAnswer] = useState(null);
   const { user, setUser } = useContext(UserContext);
-  const { setAlert, alertContent, setAlertContent } = useContext(AlertContext);
+
+  const { setAlert, setAlertContent } = useContext(AlertContext);
+  const { setModal, setModalContent } = useContext(ModalContext);
 
   useEffect(() => {
     api
@@ -54,12 +58,26 @@ export function GameContextProvider({ children }) {
   function updateUserStats() {
     if (isCorrectAnswer()) {
       let attemptsProperty;
-      if (turn === 0) attemptsProperty = "oneGuess";
-      if (turn === 1) attemptsProperty = "twoGuess";
-      if (turn === 2) attemptsProperty = "threeGuess";
-      if (turn === 3) attemptsProperty = "fourGuess";
-      if (turn === 4) attemptsProperty = "fiveGuess";
-      if (turn === 5) attemptsProperty = "sixGuess";
+      if (turn === 0) {
+        attemptsProperty = "oneGuess";
+        setAlertContent("Genius");
+      } else if (turn === 1) {
+        attemptsProperty = "twoGuess";
+        setAlertContent("Magnificent");
+      } else if (turn === 2) {
+        attemptsProperty = "threeGuess";
+        setAlertContent("Impressive");
+      } else if (turn === 3) {
+        attemptsProperty = "fourGuess";
+        setAlertContent("Splendid");
+      } else if (turn === 4) {
+        attemptsProperty = "fiveGuess";
+        setAlertContent("Great");
+      } else if (turn === 5) {
+        attemptsProperty = "sixGuess";
+        setAlertContent("Phew");
+      }
+
       const newStats = {
         [attemptsProperty]: user[attemptsProperty] + 1,
         wins: user.wins + 1,
@@ -72,6 +90,13 @@ export function GameContextProvider({ children }) {
 
       setUser({ ...user, ...newStats });
       api.updateStats(user.id, user.token, newStats);
+
+      setModalContent(<UserStats />);
+      setTimeout(() => {
+        setAlert(true);
+        setModal(true);
+      }, 1500);
+      setTimeout(() => {}, 2000);
       return;
     }
 

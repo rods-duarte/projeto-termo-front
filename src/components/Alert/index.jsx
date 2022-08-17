@@ -17,11 +17,11 @@ export default function Alert({ children }) {
 
 const Wrapper = styled.div`
   width: 200px;
-  height: 30px;
+  height: 40px;
   padding: 2px 5px;
   border-radius: 5px;
   position: fixed;
-  background-color: #5c84a3;
+  background-color: #0499fc;
   color: #fff;
   display: flex;
   justify-content: center;

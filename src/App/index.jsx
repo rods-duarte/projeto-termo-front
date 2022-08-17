@@ -12,14 +12,14 @@ export default function App() {
     <BrowserRouter>
       <UserContextProvider>
         <AlertContextProvider>
-          <GameContextProvider>
-            <ModalContextProvider>
+          <ModalContextProvider>
+            <GameContextProvider>
               <Header />
               <Routes>
                 <Route path="/" element={<Home />} />
               </Routes>
-            </ModalContextProvider>
-          </GameContextProvider>
+            </GameContextProvider>
+          </ModalContextProvider>
         </AlertContextProvider>
       </UserContextProvider>
       <GlobalStyle />

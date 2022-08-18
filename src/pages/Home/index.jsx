@@ -8,7 +8,7 @@ import { AlertContext } from "../../contexts/alertContext";
 
 export default function Home() {
   const { setModal, modalContent } = useContext(ModalContext);
-  const { setAlert, alertContent } = useContext(AlertContext);
+  const { alertContent } = useContext(AlertContext);
   const { user } = useContext(UserContext);
 
   useEffect(() => {

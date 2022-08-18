@@ -155,4 +155,9 @@ const LetterBox = styled.div`
       border: #333;
     }
   }
+
+  @media screen and (max-width: 500px) {
+    width: 40px;
+    height: 40px;
+  }
 `;

@@ -100,7 +100,8 @@ export default function Keyboard({ lettersUsed }) {
 }
 
 const KeyboardContainer = styled.div`
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -157,5 +158,24 @@ const Key = styled.div`
 
   & > svg {
     pointer-events: none;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 30px;
+    height: 40px;
+
+    &#Backspace {
+      width: 20%;
+      font-size: 23px;
+    }
+
+    &#Enter {
+      font-size: 15px;
+      width: 50px;
+    }
+  }
+
+  @media screen and (max-width: 340px) {
+    width: 25px;
   }
 `;

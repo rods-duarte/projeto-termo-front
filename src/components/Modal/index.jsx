@@ -25,7 +25,7 @@ export default function Modal({ children }) {
 }
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -37,7 +37,8 @@ const Wrapper = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   height: fit-content;
   border: 1px solid #1a1a1b;
   border-radius: 8px;

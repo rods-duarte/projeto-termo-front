@@ -4,11 +4,20 @@ This project is based on the original website <a href="https://term.ooo/">termo<
 
 <br>
 
-<div align=center style="display:flex; justify-content: center; gap:5%">
-  <img style="width: 200px;" src="/src/assets/images/termo_signin_mockup.png" />
-  <img style="width: 200px;" src="/src/assets/images/termo_game_mockup.png" />
-  <img style="width: 200px;" src="/src/assets/images/termo_endgame_mockup.png" />
+
+<div align=center>
+  <img style="width: 500px;" src="/src/assets/images/termo_signin_mockup.png" />
 </div>
+<div align=center>
+  <img style="width: 500px;" src="/src/assets/images/termo_game_mockup.png" />
+</div>
+<div align=center>
+  <img style="width: 500px;" src="/src/assets/images/termo_endgame_mockup.png" />
+</div>
+  
+  
+  
+
 
 # Features
 <ul>

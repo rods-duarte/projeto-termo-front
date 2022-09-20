@@ -8,7 +8,10 @@ This project is based on the original website <a href="https://term.ooo/">termo<
 <div align=center>
   <img style="width: 600px;" src="/src/assets/images/termo_demo.gif" />
 </div>
-  
+
+  <div align=center>
+  <a href="https://github.com/rods-duarte/projeto-termo-front">front-end</a> | <a href="https://github.com/rods-duarte/projeto-termo-back">back-end</a>
+</div>
   
 
 
